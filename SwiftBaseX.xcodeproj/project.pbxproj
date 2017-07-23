@@ -10,6 +10,7 @@
 		64BCE3CB1F2443E800DA62CB /* SwiftBaseX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64BCE3C11F2443E800DA62CB /* SwiftBaseX.framework */; };
 		64BCE3D01F2443E800DA62CB /* SwiftBaseXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BCE3CF1F2443E800DA62CB /* SwiftBaseXTests.swift */; };
 		64BCE3D21F2443E800DA62CB /* SwiftBaseX.h in Headers */ = {isa = PBXBuildFile; fileRef = 64BCE3C41F2443E800DA62CB /* SwiftBaseX.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		64BCE3DC1F24440200DA62CB /* BaseX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BCE3DB1F24440200DA62CB /* BaseX.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		64BCE3CA1F2443E800DA62CB /* SwiftBaseXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftBaseXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		64BCE3CF1F2443E800DA62CB /* SwiftBaseXTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftBaseXTests.swift; sourceTree = "<group>"; };
 		64BCE3D11F2443E800DA62CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		64BCE3DB1F24440200DA62CB /* BaseX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseX.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			children = (
 				64BCE3C41F2443E800DA62CB /* SwiftBaseX.h */,
 				64BCE3C51F2443E800DA62CB /* Info.plist */,
+				64BCE3DB1F24440200DA62CB /* BaseX.swift */,
 			);
 			path = SwiftBaseX;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 					64BCE3C01F2443E800DA62CB = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 82SAVLYZ3K;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					64BCE3C91F2443E800DA62CB = {
@@ -198,6 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64BCE3DC1F24440200DA62CB /* BaseX.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +329,7 @@
 		64BCE3D61F2443E800DA62CB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 82SAVLYZ3K;
@@ -336,6 +342,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.uport.ios.basex.SwiftBaseX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -343,6 +350,7 @@
 		64BCE3D71F2443E800DA62CB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 82SAVLYZ3K;
@@ -362,6 +370,7 @@
 		64BCE3D91F2443E800DA62CB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 82SAVLYZ3K;
 				INFOPLIST_FILE = SwiftBaseXTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -374,6 +383,7 @@
 		64BCE3DA1F2443E800DA62CB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 82SAVLYZ3K;
 				INFOPLIST_FILE = SwiftBaseXTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
