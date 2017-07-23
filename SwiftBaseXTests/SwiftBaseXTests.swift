@@ -29,4 +29,13 @@ class SwiftBaseXTests: XCTestCase {
         XCTAssertEqual(encode(alpha:BASE58, data:"hello".data(using: String.Encoding.utf8)!), "Cn8eVZg")
     }
 
+    
+    func testHexDecode() {
+        XCTAssertEqual(decode(alpha:HEX, data:"68656c6c6f"), "hello".data(using: String.Encoding.utf8)!)
+    }
+    
+    func testBase58Decode() {
+        XCTAssertEqual(decode(alpha:BASE58, data:"Cn8eVZg"), "hello".data(using: String.Encoding.utf8)!)
+    }
+
 }

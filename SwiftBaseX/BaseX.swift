@@ -58,39 +58,32 @@ func encode (alpha:(map:[Character:UInt], indexed:[Character], base: UInt, leade
     let final = output
     return final
 }
-/*
-func decodeUnsafe (string) {
-    if (string.length === 0) return Buffer.allocUnsafe(0)
-    
-    var bytes = [0]
-    for (var i = 0; i < string.length; i++) {
-        var value = ALPHABET_MAP[string[i]]
-        if (value === undefined) return
-        
-        for (var j = 0, carry = value; j < bytes.length; ++j) {
-            carry += bytes[j] * BASE
-            bytes[j] = carry & 0xff
+
+func decode (alpha:(map:[Character:UInt], indexed:[Character], base: UInt, leader: Character), data: String) -> Data {
+    if data.isEmpty {
+        return Data()
+    }
+    var bytes:[UInt8] = [0]
+    for c in data.characters {
+        var carry = alpha.map[c]!
+
+        for j in 0..<bytes.count {
+            carry += UInt(bytes[j]) * alpha.base
+            bytes[j] = UInt8(carry & 0xff)
             carry >>= 8
         }
         
         while (carry > 0) {
-            bytes.push(carry & 0xff)
+            bytes.append(UInt8(carry & 0xff))
             carry >>= 8
         }
     }
     
     // deal with leading zeros
-    for (var k = 0; string[k] === LEADER && k < string.length - 1; ++k) {
-        bytes.push(0)
-    }
+    //for (var k = 0; string[k] === LEADER && k < string.length - 1; ++k) {
+    //    bytes.push(0)
+    //}
     
-    return Buffer.from(bytes.reverse())
+    return Data(bytes.reversed())
 }
 
-func decode (string) {
-    var buffer = decodeUnsafe(string)
-    if (buffer) return buffer
-    
-    throw new Error('Non-base' + BASE + ' character')
-}
- */
