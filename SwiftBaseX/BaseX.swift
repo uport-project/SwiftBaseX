@@ -23,10 +23,10 @@ func buildAlphabetBase(_ alphabet: String) -> (map: [Character:UInt], indexed: [
     return (map: finalMap, indexed: indexed, base: UInt(characters.count), leader: characters.first!)
 }
 
-let HEX = buildAlphabetBase("0123456789abcdef")
-let BASE58 = buildAlphabetBase("123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz")
+public let HEX = buildAlphabetBase("0123456789abcdef")
+public let BASE58 = buildAlphabetBase("123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz")
 
-func encode (alpha:(map:[Character:UInt], indexed:[Character], base: UInt, leader: Character), data: Data) -> String {
+public func encode (alpha:(map:[Character:UInt], indexed:[Character], base: UInt, leader: Character), data: Data) -> String {
     if data.count == 0 {
         return ""
     }
@@ -59,7 +59,7 @@ func encode (alpha:(map:[Character:UInt], indexed:[Character], base: UInt, leade
     return final
 }
 
-func decode (alpha:(map:[Character:UInt], indexed:[Character], base: UInt, leader: Character), data: String) -> Data {
+public func decode (alpha:(map:[Character:UInt], indexed:[Character], base: UInt, leader: Character), data: String) -> Data {
     if data.isEmpty {
         return Data()
     }
@@ -87,22 +87,22 @@ func decode (alpha:(map:[Character:UInt], indexed:[Character], base: UInt, leade
     return Data(bytes.reversed())
 }
 
-extension Data {
-    func hexEncodedString() -> String {
+public extension Data {
+    public func hexEncodedString() -> String {
         return encode(alpha:HEX, data: self)
     }
 
-    func base58EncodedString() -> String {
+    public func base58EncodedString() -> String {
         return encode(alpha:BASE58, data: self)
     }
 }
 
-extension String {
-    func decodeHex() -> Data {
+public extension String {
+    public func decodeHex() -> Data {
         return decode(alpha:HEX, data: self)
     }
     
-    func decodeBase58() -> Data {
+    public func decodeBase58() -> Data {
         return decode(alpha:BASE58, data: self)
     }
 }
