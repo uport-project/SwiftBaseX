@@ -87,3 +87,23 @@ func decode (alpha:(map:[Character:UInt], indexed:[Character], base: UInt, leade
     return Data(bytes.reversed())
 }
 
+extension Data {
+    func hexEncodedString() -> String {
+        return encode(alpha:HEX, data: self)
+    }
+
+    func base58EncodedString() -> String {
+        return encode(alpha:BASE58, data: self)
+    }
+}
+
+extension String {
+    func decodeHex() -> Data {
+        return decode(alpha:HEX, data: self)
+    }
+    
+    func decodeBase58() -> Data {
+        return decode(alpha:BASE58, data: self)
+    }
+}
+

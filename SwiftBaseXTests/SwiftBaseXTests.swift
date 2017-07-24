@@ -29,6 +29,13 @@ class SwiftBaseXTests: XCTestCase {
         XCTAssertEqual(encode(alpha:BASE58, data:"hello".data(using: String.Encoding.utf8)!), "Cn8eVZg")
     }
 
+    func testHexEncodeExtension() {
+        XCTAssertEqual("hello".data(using: String.Encoding.utf8)!.hexEncodedString(), "68656c6c6f")
+    }
+
+    func testBase58EncodeExtension() {
+        XCTAssertEqual("hello".data(using: String.Encoding.utf8)!.base58EncodedString(), "Cn8eVZg")
+    }
     
     func testHexDecode() {
         XCTAssertEqual(decode(alpha:HEX, data:"68656c6c6f"), "hello".data(using: String.Encoding.utf8)!)
@@ -36,6 +43,14 @@ class SwiftBaseXTests: XCTestCase {
     
     func testBase58Decode() {
         XCTAssertEqual(decode(alpha:BASE58, data:"Cn8eVZg"), "hello".data(using: String.Encoding.utf8)!)
+    }
+    
+    func testHexDecodeExtension() {
+        XCTAssertEqual("68656c6c6f".decodeHex(), "hello".data(using: String.Encoding.utf8)!)
+    }
+
+    func testBase58DecodeExtension() {
+        XCTAssertEqual("Cn8eVZg".decodeBase58(), "hello".data(using: String.Encoding.utf8)!)
     }
 
 }
