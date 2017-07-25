@@ -53,28 +53,30 @@ class SwiftBaseXTests: XCTestCase {
         XCTAssertEqual("Cn8eVZg".decodeBase58(), "hello".data(using: String.Encoding.utf8)!)
     }
 
-    func testFullHexEncode() {
+    func testAllHexEncode() {
         let fixtures = parseTestCases("valid")
         for pair in fixtures {
             XCTAssertEqual(pair["base64"]?.decodeBase64().hexEncodedString(), pair["hex"])
+            let fullHex = pair["fullhex"] != nil ? pair["fullhex"] : pair["hex"]
+            XCTAssertEqual(pair["base64"]?.decodeBase64().fullHexEncodedString(), fullHex)
         }
     }
     
-    func testFullHexDecode() {
+    func testAllHexDecode() {
         let fixtures = parseTestCases("valid")
         for pair in fixtures {
             XCTAssertEqual(pair["hex"]?.decodeHex(), pair["base64"]?.decodeBase64())
         }
     }
 
-    func testFullBase58Decode() {
+    func testAllBase58Decode() {
         let fixtures = parseTestCases("valid")
         for pair in fixtures {
             XCTAssertEqual(pair["base58"]?.decodeBase58(), pair["base64"]?.decodeBase64())
         }
     }
 
-    func testFullBase58Encode() {
+    func testAllBase58Encode() {
         let fixtures = parseTestCases("valid")
         for pair in fixtures {
             XCTAssertEqual(pair["base64"]?.decodeBase64().base58EncodedString(), pair["base58"])

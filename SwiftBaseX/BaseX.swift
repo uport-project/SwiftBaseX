@@ -9,7 +9,7 @@
 import Foundation
 
 
-func buildAlphabetBase(_ alphabet: String) -> (map: [Character:UInt], indexed: [Character], base: UInt, leader: Character) {
+public func buildAlphabetBase(_ alphabet: String) -> (map: [Character:UInt], indexed: [Character], base: UInt, leader: Character) {
     let characters = alphabet.characters
     let indexed:[Character] = characters.map {$0}
     var tmpMap = [Character:UInt]()
@@ -100,6 +100,11 @@ public func decode (alpha:(map:[Character:UInt], indexed:[Character], base: UInt
 public extension Data {
     public func hexEncodedString() -> String {
         return encode(alpha:HEX, data: self)
+    }
+
+    // Convenience function for a more traditional uncompressed hex
+    public func fullHexEncodedString() -> String {
+        return map { String(format: "%02hhx", $0) }.joined()
     }
 
     public func base58EncodedString() -> String {

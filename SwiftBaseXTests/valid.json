@@ -26,6 +26,7 @@
   },
   {
     "hex": "0eb15231dfceb60925886b67d065299925915aeb172c06647",
+    "fullhex": "00eb15231dfceb60925886b67d065299925915aeb172c06647",
     "base58": "1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L",
     "base64": "AOsVIx3862CSWIa2fQZSmZJZFa6xcsBmRw=="
   },
@@ -61,6 +62,7 @@
   },
   {
     "hex": "03c176e659bea0f29a3e9bf7880c112b1b31b4dc826268187",
+    "fullhex": "003c176e659bea0f29a3e9bf7880c112b1b31b4dc826268187",
     "base58": "16UjcYNBG9GTK4uq2f7yYEbuifqCzoLMGS",
     "base64": "ADwXbmWb6g8po+m/eIDBErGzG03IJiaBhw=="
   },
@@ -141,6 +143,7 @@
   },
   {
     "hex": "5f0be055db47a0dc9",
+    "fullhex": "05f0be055db47a0dc9",
     "base58": "5PN768Kr5oEp",
     "base64": "BfC+BV20eg3J"
   },
@@ -161,6 +164,7 @@
   },
   {
     "hex": "f45dadf4e64c5d5c2",
+    "fullhex": "0f45dadf4e64c5d5c2",
     "base58": "CGyVUMmCKLRf",
     "base64": "D0Xa305kxdXC"
   },
