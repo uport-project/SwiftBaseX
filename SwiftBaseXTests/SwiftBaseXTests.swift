@@ -53,4 +53,53 @@ class SwiftBaseXTests: XCTestCase {
         XCTAssertEqual("Cn8eVZg".decodeBase58(), "hello".data(using: String.Encoding.utf8)!)
     }
 
+    func testFullHexEncode() {
+        let fixtures = parseTestCases("valid")
+        for pair in fixtures {
+            XCTAssertEqual(pair["base64"]?.decodeBase64().hexEncodedString(), pair["hex"])
+        }
+    }
+    
+    func testFullHexDecode() {
+        let fixtures = parseTestCases("valid")
+        for pair in fixtures {
+            XCTAssertEqual(pair["hex"]?.decodeHex(), pair["base64"]?.decodeBase64())
+        }
+    }
+
+    func testFullBase58Decode() {
+        let fixtures = parseTestCases("valid")
+        for pair in fixtures {
+            XCTAssertEqual(pair["base58"]?.decodeBase58(), pair["base64"]?.decodeBase64())
+        }
+    }
+
+    func testFullBase58Encode() {
+        let fixtures = parseTestCases("valid")
+        for pair in fixtures {
+            XCTAssertEqual(pair["base64"]?.decodeBase64().base58EncodedString(), pair["base58"])
+        }
+    }
+
+    func parseTestCases(_ fileName: String) -> [[String:String]] {
+        do {            
+            let file = Bundle(for: type(of: self)).url(forResource: fileName, withExtension: "json")
+            let data = try Data(contentsOf: file!)
+            guard let json = try? JSONSerialization.jsonObject(with: data) as? [[String:String]] else {
+                return []
+            }
+            return json!
+        } catch {
+            print(error)
+            return []
+        }
+    }
+
 }
+
+extension String {
+    func decodeBase64() -> Data {
+        return Data(base64Encoded: self)!
+    }
+}
+

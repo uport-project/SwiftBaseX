@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		644A09981F26C014008E1389 /* valid.json in Resources */ = {isa = PBXBuildFile; fileRef = 644A09971F26C014008E1389 /* valid.json */; };
 		64BCE3CB1F2443E800DA62CB /* SwiftBaseX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64BCE3C11F2443E800DA62CB /* SwiftBaseX.framework */; };
 		64BCE3D01F2443E800DA62CB /* SwiftBaseXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BCE3CF1F2443E800DA62CB /* SwiftBaseXTests.swift */; };
 		64BCE3D21F2443E800DA62CB /* SwiftBaseX.h in Headers */ = {isa = PBXBuildFile; fileRef = 64BCE3C41F2443E800DA62CB /* SwiftBaseX.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -24,6 +25,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		644A09971F26C014008E1389 /* valid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = valid.json; sourceTree = "<group>"; };
 		64BCE3C11F2443E800DA62CB /* SwiftBaseX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftBaseX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		64BCE3C41F2443E800DA62CB /* SwiftBaseX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftBaseX.h; sourceTree = "<group>"; };
 		64BCE3C51F2443E800DA62CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 		64BCE3CE1F2443E800DA62CB /* SwiftBaseXTests */ = {
 			isa = PBXGroup;
 			children = (
+				644A09971F26C014008E1389 /* valid.json */,
 				64BCE3CF1F2443E800DA62CB /* SwiftBaseXTests.swift */,
 				64BCE3D11F2443E800DA62CB /* Info.plist */,
 			);
@@ -192,6 +195,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				644A09981F26C014008E1389 /* valid.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +416,7 @@
 				64BCE3D71F2443E800DA62CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		64BCE3D81F2443E800DA62CB /* Build configuration list for PBXNativeTarget "SwiftBaseXTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +425,7 @@
 				64BCE3DA1F2443E800DA62CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -30,9 +30,11 @@ public func encode (alpha:(map:[Character:UInt], indexed:[Character], base: UInt
     if data.count == 0 {
         return ""
     }
+    let bytes = [UInt8](data)
+    
     var digits:[UInt] = [0]
-    data.forEach {
-        var carry = UInt($0)
+    for byte in bytes {
+        var carry = UInt(byte)
         for j in 0..<digits.count {
             carry += digits[j] << 8
             digits[j] = carry % alpha.base
@@ -45,11 +47,14 @@ public func encode (alpha:(map:[Character:UInt], indexed:[Character], base: UInt
     }
     
     var output: String = ""
-    
     // deal with leading zeros
-    // for (var k = 0; data[k] === 0 && k < data.count - 1; k += 1) {
-    //    output.append(alpha.leader)
-    //}
+    for k in 0..<data.count {
+        if (bytes[k] == UInt8(0)) {
+            output.append(alpha.leader)
+        } else {
+            break
+        }
+    }
     // convert digits to a string
     for d in digits.reversed() {
         output.append(alpha.indexed[Int(d)])
@@ -64,7 +69,8 @@ public func decode (alpha:(map:[Character:UInt], indexed:[Character], base: UInt
         return Data()
     }
     var bytes:[UInt8] = [0]
-    for c in data.characters {
+    let characters = data.characters
+    for c in characters {
         var carry = alpha.map[c]!
 
         for j in 0..<bytes.count {
@@ -80,9 +86,13 @@ public func decode (alpha:(map:[Character:UInt], indexed:[Character], base: UInt
     }
     
     // deal with leading zeros
-    //for (var k = 0; string[k] === LEADER && k < string.length - 1; ++k) {
-    //    bytes.push(0)
-    //}
+    for k in 0..<characters.count {
+        if (data[data.index(data.startIndex, offsetBy: k)] == alpha.leader) {
+            bytes.append(0)
+        } else {
+            break
+        }
+    }
     
     return Data(bytes.reversed())
 }
