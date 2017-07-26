@@ -31,11 +31,18 @@ For cases where you need a full hex string without leading zero compression we'v
 let encoded:String = data.fullHexEncodedString()
 ```
 
+Hex strings are commonly prefixed with `0x` in the crypto world. `0x` prefixes are automatically stripped when decoding. To automatically add `0x` during hex encoding pass in `true` to either `hexEncodedString()` or `fullHexEncodedString()`.
+
 For `String` we include the `decodeHex()` and `decodeBase58()` methods as an extension.
 
 ```swift
 import SwiftBaseX
 
 let decoded: Data = "Cn8eVZg".decodeBase58()
+```
+For cases where you need to decode a full hex string without leading zero compression we've also included the following variation.
+
+```swift
+let encoded:String = data.decodeFullHex()
 ```
 
