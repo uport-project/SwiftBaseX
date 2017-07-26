@@ -26,6 +26,10 @@ public func buildAlphabetBase(_ alphabet: String) -> (map: [Character:UInt], ind
 public let HEX = buildAlphabetBase("0123456789abcdef")
 public let BASE58 = buildAlphabetBase("123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz")
 
+enum BaseXError: Error {
+    case invalidCharacter
+}
+
 public func encode (alpha:(map:[Character:UInt], indexed:[Character], base: UInt, leader: Character), data: Data) -> String {
     if data.count == 0 {
         return ""
@@ -64,13 +68,16 @@ public func encode (alpha:(map:[Character:UInt], indexed:[Character], base: UInt
     return final
 }
 
-public func decode (alpha:(map:[Character:UInt], indexed:[Character], base: UInt, leader: Character), data: String) -> Data {
+public func decode (alpha:(map:[Character:UInt], indexed:[Character], base: UInt, leader: Character), data: String) throws -> Data  {
     if data.isEmpty {
         return Data()
     }
     var bytes:[UInt8] = [0]
     let characters = data.characters
     for c in characters {
+        if (alpha.map[c] == nil) {
+            throw BaseXError.invalidCharacter
+        }
         var carry = alpha.map[c]!
 
         for j in 0..<bytes.count {
@@ -131,14 +138,13 @@ public extension Data {
 }
 
 public extension String {
-    public func decodeHex() -> Data {
-        return decode(alpha:HEX, data: strip0x(self))
+    public func decodeHex() throws -> Data {
+        return try decode(alpha:HEX, data: strip0x(self))
     }
     
-    public func decodeFullHex() -> Data {
+    public func decodeFullHex() throws -> Data {
         let stripped = strip0x(self)
         var data = Data(capacity: stripped.characters.count / 2)
-        
         let regex = try! NSRegularExpression(pattern: "[0-9a-f]{1,2}", options: .caseInsensitive)
         regex.enumerateMatches(in: stripped, range: NSMakeRange(0, stripped.utf16.count)) { match, flags, stop in
             let byteString = (stripped as NSString).substring(with: match!.range)
@@ -149,8 +155,8 @@ public extension String {
         return data
     }
     
-    public func decodeBase58() -> Data {
-        return decode(alpha:BASE58, data: self)
+    public func decodeBase58() throws -> Data {
+        return try decode(alpha:BASE58, data: self)
     }
 }
 
