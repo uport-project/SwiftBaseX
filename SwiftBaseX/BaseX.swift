@@ -26,7 +26,7 @@ public func buildAlphabetBase(_ alphabet: String) -> (map: [Character:UInt], ind
 public let HEX = buildAlphabetBase("0123456789abcdef")
 public let BASE58 = buildAlphabetBase("123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz")
 
-enum BaseXError: Error {
+public enum BaseXError: Error {
     case invalidCharacter
 }
 
