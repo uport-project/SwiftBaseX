@@ -97,14 +97,32 @@ public func decode (alpha:(map:[Character:UInt], indexed:[Character], base: UInt
     return Data(bytes.reversed())
 }
 
+func strip0x(_ hex: String) -> String {
+    if hex.characters.count >= 2 {
+        let prefix = hex.index(hex.startIndex, offsetBy: 2)
+        if hex.substring(to: prefix) == "0x" {
+            return hex.substring(from: prefix)
+        }
+    }
+    return hex
+}
+
 public extension Data {
-    public func hexEncodedString() -> String {
-        return encode(alpha:HEX, data: self)
+    public func hexEncodedString(_ prefixed: Bool = false) -> String {
+        let encoded = encode(alpha:HEX, data: self)
+        if prefixed {
+            return "0x".appending(encoded)
+        }
+        return encoded
     }
 
     // Convenience function for a more traditional uncompressed hex
-    public func fullHexEncodedString() -> String {
-        return map { String(format: "%02hhx", $0) }.joined()
+    public func fullHexEncodedString(_ prefixed: Bool = false) -> String {
+        let encoded = map { String(format: "%02x", $0) }.joined()
+        if prefixed {
+            return "0x".appending(encoded)
+        }
+        return encoded
     }
 
     public func base58EncodedString() -> String {
@@ -114,7 +132,21 @@ public extension Data {
 
 public extension String {
     public func decodeHex() -> Data {
-        return decode(alpha:HEX, data: self)
+        return decode(alpha:HEX, data: strip0x(self))
+    }
+    
+    public func decodeFullHex() -> Data {
+        let stripped = strip0x(self)
+        var data = Data(capacity: stripped.characters.count / 2)
+        
+        let regex = try! NSRegularExpression(pattern: "[0-9a-f]{1,2}", options: .caseInsensitive)
+        regex.enumerateMatches(in: stripped, range: NSMakeRange(0, stripped.utf16.count)) { match, flags, stop in
+            let byteString = (stripped as NSString).substring(with: match!.range)
+            var num = UInt8(byteString, radix: 16)!
+            data.append(&num, count: 1)
+        }
+                
+        return data
     }
     
     public func decodeBase58() -> Data {

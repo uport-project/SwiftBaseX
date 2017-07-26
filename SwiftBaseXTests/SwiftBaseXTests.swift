@@ -31,6 +31,9 @@ class SwiftBaseXTests: XCTestCase {
 
     func testHexEncodeExtension() {
         XCTAssertEqual("hello".data(using: String.Encoding.utf8)!.hexEncodedString(), "68656c6c6f")
+        XCTAssertEqual("hello".data(using: String.Encoding.utf8)!.hexEncodedString(true), "0x68656c6c6f")
+        XCTAssertEqual("hello".data(using: String.Encoding.utf8)!.fullHexEncodedString(), "68656c6c6f")
+        XCTAssertEqual("hello".data(using: String.Encoding.utf8)!.fullHexEncodedString(true), "0x68656c6c6f")
     }
 
     func testBase58EncodeExtension() {
@@ -47,6 +50,9 @@ class SwiftBaseXTests: XCTestCase {
     
     func testHexDecodeExtension() {
         XCTAssertEqual("68656c6c6f".decodeHex(), "hello".data(using: String.Encoding.utf8)!)
+        XCTAssertEqual("0x68656c6c6f".decodeHex(), "hello".data(using: String.Encoding.utf8)!)
+        XCTAssertEqual("68656c6c6f".decodeFullHex(), "hello".data(using: String.Encoding.utf8)!)
+        XCTAssertEqual("0x68656c6c6f".decodeFullHex(), "hello".data(using: String.Encoding.utf8)!)
     }
 
     func testBase58DecodeExtension() {
@@ -66,6 +72,8 @@ class SwiftBaseXTests: XCTestCase {
         let fixtures = parseTestCases("valid")
         for pair in fixtures {
             XCTAssertEqual(pair["hex"]?.decodeHex(), pair["base64"]?.decodeBase64())
+            let fullHex = pair["fullhex"] != nil ? pair["fullhex"] : pair["hex"]
+            XCTAssertEqual(fullHex?.decodeFullHex(), pair["base64"]?.decodeBase64() )
         }
     }
 
