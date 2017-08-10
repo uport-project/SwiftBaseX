@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "BaseX"
-  s.version      = "0.0.4"
+  s.version      = "0.0.7"
   s.summary      = "BaseX encoding"
 
   # This description is used to generate tags and improve search results.
