@@ -116,7 +116,7 @@ func strip0x(_ hex: String) -> String {
 
 public extension Data {
     public func hexEncodedString(_ prefixed: Bool = false) -> String {
-        let encoded = encode(alpha:HEX, data: self)
+        let encoded = SwiftBaseX.encode(alpha:HEX, data: self)
         if prefixed {
             return "0x".appending(encoded)
         }
@@ -133,7 +133,7 @@ public extension Data {
     }
 
     public func base58EncodedString() -> String {
-        return encode(alpha:BASE58, data: self)
+        return SwiftBaseX.encode(alpha:BASE58, data: self)
     }
 }
 
